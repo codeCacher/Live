@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">Live</string>
+
+    <string name="splash_slogan">做年轻人爱看的直播</string>
+
+    //首页底部TAB按键
+    <string name="tab_home">首页</string>
+    <string name="tab_live">直播</string>
+    <string name="tab_follow">关注</string>
+    <string name="tab_me">我的</string>
+
+    <string name="quit_tip">再按一次退出直播</string>
+
+    <string name="live_title">直播</string>
+
+    <string name="scoll_aware_fab_behavior">.view.ScollAwareFABBehavior</string>
+
+</resources>

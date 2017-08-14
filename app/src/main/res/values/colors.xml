@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#ffffff</color>
+    <color name="colorPrimaryDark">#FB5553</color>
+    <color name="colorAccent">#FB5553</color>
+
+    <color name="red">#FF0000</color>
+    <color name="green">#00FF00</color>
+    <color name="blue">#0000FF</color>
+
+
+    <color name="default_bg_color">#f0f0f0</color>
+    <color name="title_bg_color">#fafafa</color>
+    <color name="line_bg">#e5e5e5</color>
+
+    <color name="tab_color_normal">#A7A7A7</color>
+    <color name="tab_color_selected">#FB5553</color>
+
+    <color name="room_lable_color">#999999</color>
+
+</resources>
