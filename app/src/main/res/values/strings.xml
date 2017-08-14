@@ -3,16 +3,38 @@
 
     <string name="splash_slogan">做年轻人爱看的直播</string>
 
-    //首页底部TAB按键
+    <!--首页底部TAB按键-->
     <string name="tab_home">首页</string>
     <string name="tab_live">直播</string>
     <string name="tab_follow">关注</string>
     <string name="tab_me">我的</string>
 
+    <!-- 我的关注 -->
+    <string name="tips_current_not_login">当前尚未登录</string>
+    <string name="btn_follow_click_login">点击登录，精彩不再错过</string>
+
+    <!-- 我的 -->
+    <string name="btn_click_login">点击登录</string>
+    <string name="me_follow">关注</string>
+    <string name="me_fans">粉丝</string>
+    <string name="me_recharge">充值</string>
+    <string name="me_starlight">我的星光</string>
+    <string name="me_contribution">星光贡献榜</string>
+    <string name="me_watch">观看历史</string>
+    <string name="me_level">我的等级</string>
+    <string name="me_task">任务中心</string>
+    <string name="me_game">游戏中心</string>
+    <string name="me_setting">设置</string>
+
     <string name="quit_tip">再按一次退出直播</string>
 
     <string name="live_title">直播</string>
+    <string name="follow_title">关注</string>
 
     <string name="scoll_aware_fab_behavior">.view.ScollAwareFABBehavior</string>
+
+    <string name="network_unavailable">网络状态不佳</string>
+    <string name="page_load_failed">加载失败…</string>
+    <string name="swipe_down_to_refresh">下拉刷新数据</string>
 
 </resources>

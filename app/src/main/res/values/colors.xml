@@ -4,18 +4,34 @@
     <color name="colorPrimaryDark">#FB5553</color>
     <color name="colorAccent">#FB5553</color>
 
+    <!--通用颜色-->
     <color name="red">#FF0000</color>
     <color name="green">#00FF00</color>
     <color name="blue">#0000FF</color>
+    <color name="black">#000000</color>
+    <color name="white">#FFFFFF</color>
 
-
+    <!--默认背景色-->
     <color name="default_bg_color">#f0f0f0</color>
+    <!--顶部标题栏背景色-->
     <color name="title_bg_color">#fafafa</color>
+    <!--标题栏和底部导航等的分割线色-->
     <color name="line_bg">#e5e5e5</color>
+    <!--浅红色背景-->
+    <color name="bg_red_color_pressed">#FFEEF0</color>
 
+    <!--tab文字默认颜色-->
     <color name="tab_color_normal">#A7A7A7</color>
+    <!--tab文字选中颜色-->
     <color name="tab_color_selected">#FB5553</color>
 
+    <!--房间标签颜色-->
     <color name="room_lable_color">#999999</color>
+
+    <!--无效灰色字体-->
+    <color name="text_error_color">#7f000000</color>
+
+    <color name="me_mid_title_bg">#1f000000</color>
+    <color name="me_mid_title_mid_line_bg">#7f000000</color>
 
 </resources>

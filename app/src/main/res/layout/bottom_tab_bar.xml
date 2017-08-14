@@ -39,7 +39,7 @@
             android:textSize="@dimen/bottom_menu_text_size" />
 
         <RadioButton
-            android:id="@+id/rbFollw"
+            android:id="@+id/rbFollow"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
