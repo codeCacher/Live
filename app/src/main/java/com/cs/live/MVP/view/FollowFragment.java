@@ -1,4 +1,4 @@
-package com.cs.live;
+package com.cs.live.MVP.view;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -8,6 +8,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.cs.live.R;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

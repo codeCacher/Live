@@ -12,6 +12,10 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 
+import com.cs.live.MVP.view.FollowFragment;
+import com.cs.live.MVP.view.HomeFragment;
+import com.cs.live.MVP.view.LiveFragment;
+import com.cs.live.MVP.view.MeFragment;
 import com.cs.live.utils.ToastUtils;
 
 import org.greenrobot.eventbus.EventBus;

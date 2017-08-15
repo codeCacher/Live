@@ -1,4 +1,4 @@
-package com.cs.live;
+package com.cs.live.MVP.view;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
