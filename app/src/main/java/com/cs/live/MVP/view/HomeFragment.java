@@ -2,10 +2,14 @@ package com.cs.live.MVP.view;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import com.cs.live.R;
 import com.cs.live.bean.LiveCategory;
@@ -13,12 +17,13 @@ import com.cs.live.bean.LiveInfo;
 import com.cs.live.bean.LiveListResult;
 import com.cs.live.http.APIRetrofit;
 
-import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
-import okhttp3.ResponseBody;
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
 import rx.Subscriber;
-import rx.functions.Action1;
 import rx.schedulers.Schedulers;
 
 /**
@@ -26,76 +31,49 @@ import rx.schedulers.Schedulers;
  */
 
 public class HomeFragment extends Fragment {
+    @BindView(R.id.iv_search)
+    ImageView ivSearch;
+    @BindView(R.id.iv_message)
+    ImageView ivMessage;
+    @BindView(R.id.tlIndicator)
+    TabLayout tlIndicator;
+    @BindView(R.id.ivMore)
+    ImageView ivMore;
+    @BindView(R.id.vpFragment)
+    ViewPager vpFragment;
+    @BindView(R.id.ivFab)
+    ImageView ivFab;
+    Unbinder unbinder;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = LayoutInflater.from(getContext()).inflate(R.layout.fragment_home, container, false);
+        unbinder = ButterKnife.bind(this, view);
 
-        APIRetrofit
-                .getAPIService()
-                .getLiveListResult()
-                .subscribeOn(Schedulers.io())
-                .subscribe(new Subscriber<LiveListResult>() {
-                    @Override
-                    public void onCompleted() {
+        final List<Fragment> fragmentList = new ArrayList<>();
+        LiveListFragment liveListFragment = new LiveListFragment();
+        fragmentList.add(liveListFragment);
 
-                    }
+        vpFragment.setAdapter(new FragmentPagerAdapter(getFragmentManager()) {
+            @Override
+            public Fragment getItem(int position) {
+                return fragmentList.get(position);
+            }
 
-                    @Override
-                    public void onError(Throwable e) {
-                        e.printStackTrace();
-                    }
-
-                    @Override
-                    public void onNext(LiveListResult list) {
-                        List<LiveInfo> data = list.getData();
-                    }
-                });
-
-        APIRetrofit
-                .getAPIService()
-                .getAllCategories()
-                .subscribeOn(Schedulers.io())
-                .subscribe(new Subscriber<List<LiveCategory>>() {
-                    @Override
-                    public void onCompleted() {
-
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-
-                    }
-
-                    @Override
-                    public void onNext(List<LiveCategory> liveCategories) {
-                        liveCategories.size();
-                    }
-                });
-
-        APIRetrofit
-                .getAPIService()
-                .getLiveListResultByCategories("beauty")
-                .subscribeOn(Schedulers.io())
-                .subscribe(new Subscriber<LiveListResult>() {
-                    @Override
-                    public void onCompleted() {
-
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-
-                    }
-
-                    @Override
-                    public void onNext(LiveListResult liveListResult) {
-                        List<LiveInfo> data = liveListResult.getData();
-                        LiveInfo liveInfo = data.get(0);
-                    }
-                });
-
+            @Override
+            public int getCount() {
+                return fragmentList.size();
+            }
+        });
 
         return view;
     }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        unbinder.unbind();
+    }
 }
+

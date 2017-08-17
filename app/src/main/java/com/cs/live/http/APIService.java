@@ -42,14 +42,14 @@ public interface APIService {
      * 获取直播列表
      */
     @GET("json/play/list.json?v=3.0.1&os=1&ver=4")
-    Observable<LiveListResult> getLiveListResult();
+    Observable<LiveListResult> getLiveList();
 
 
     /**
      * 根据分类slug获取该类直播列表
      */
     @GET("json/categories/{slug}/list.json?v=3.0.1&os=1&ver=4")
-    Observable<LiveListResult> getLiveListResultByCategories(@Path("slug") String slug);
+    Observable<LiveListResult> getLiveListByCategories(@Path("slug") String slug);
 
     /**
      * 进入房间
