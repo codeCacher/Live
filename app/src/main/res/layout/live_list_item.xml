@@ -1,21 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginBottom="6dp"
     android:background="?android:attr/selectableItemBackground">
-    <ImageView
-        android:id="@+id/iv"
+    <com.facebook.drawee.view.SimpleDraweeView
+        android:id="@+id/iv_thumb"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:minHeight="100dp"
-        android:scaleType="centerCrop"
-        android:src="@mipmap/live_default"/>
+        fresco:actualImageScaleType="centerCrop"
+        fresco:placeholderImageScaleType="centerCrop"
+        fresco:placeholderImage="@mipmap/live_default"
+        fresco:failureImage="@mipmap/live_default"/>
     <TextView
         android:id="@+id/tvTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/iv"
+        android:layout_alignBottom="@+id/iv_thumb"
         android:layout_margin="2dp"
         android:textColor="@color/white"
         android:lines="1"
@@ -24,7 +27,7 @@
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/iv"
+        android:layout_below="@+id/iv_thumb"
         android:gravity="center_horizontal"
         android:padding="4dp">
         <TextView
@@ -43,7 +46,7 @@
             android:drawablePadding="2dp"
             android:textSize="10sp"
             android:lines="1"
-            android:textColor="@color/text_error_color"/>
+            android:textColor="@color/text_gray_color"/>
     </LinearLayout>
 
 </RelativeLayout>

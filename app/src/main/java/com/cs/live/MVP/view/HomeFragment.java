@@ -11,11 +11,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.cs.live.MVP.model.LiveInfoDateSource;
+import com.cs.live.MVP.presenter.LiveCategoryImpPresenter;
+import com.cs.live.MVP.presenter.LiveCategoryPresenter;
 import com.cs.live.R;
 import com.cs.live.bean.LiveCategory;
-import com.cs.live.bean.LiveInfo;
-import com.cs.live.bean.LiveListResult;
-import com.cs.live.http.APIRetrofit;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,14 +23,12 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
-import rx.Subscriber;
-import rx.schedulers.Schedulers;
 
 /**
  * Created by Administrator on 2017/8/14.
  */
 
-public class HomeFragment extends Fragment {
+public class HomeFragment extends BaseRootFragment implements LiveCategoryView {
     @BindView(R.id.iv_search)
     ImageView ivSearch;
     @BindView(R.id.iv_message)
@@ -43,7 +41,11 @@ public class HomeFragment extends Fragment {
     ViewPager vpFragment;
     @BindView(R.id.ivFab)
     ImageView ivFab;
+
     Unbinder unbinder;
+    private LiveCategoryPresenter mPresenter;
+    private List<Fragment> mFragmentList = new ArrayList<>();
+    private FragmentPagerAdapter mPagerAdapter;
 
     @Nullable
     @Override
@@ -51,21 +53,25 @@ public class HomeFragment extends Fragment {
         View view = LayoutInflater.from(getContext()).inflate(R.layout.fragment_home, container, false);
         unbinder = ButterKnife.bind(this, view);
 
-        final List<Fragment> fragmentList = new ArrayList<>();
-        LiveListFragment liveListFragment = new LiveListFragment();
-        fragmentList.add(liveListFragment);
+        mPresenter = new LiveCategoryImpPresenter(getContext(), this, new LiveInfoDateSource());
 
-        vpFragment.setAdapter(new FragmentPagerAdapter(getFragmentManager()) {
+        tlIndicator.setupWithViewPager(vpFragment);
+        mPagerAdapter = new FragmentPagerAdapter(getFragmentManager()) {
             @Override
             public Fragment getItem(int position) {
-                return fragmentList.get(position);
+                return mFragmentList.get(position);
             }
 
             @Override
             public int getCount() {
-                return fragmentList.size();
+                return mFragmentList.size();
             }
-        });
+        };
+        vpFragment.setAdapter(mPagerAdapter);
+        vpFragment.setOffscreenPageLimit(2);
+
+
+        mPresenter.start();
 
         return view;
     }
@@ -74,6 +80,49 @@ public class HomeFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         unbinder.unbind();
+    }
+
+    @Override
+    public void setPresenter(LiveCategoryPresenter presenter) {
+        this.mPresenter = presenter;
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.iv_message:
+                //TODO 要判断当前有没有登录
+                startLoginActivity();
+                break;
+
+            case R.id.iv_search:
+                startSearchActivity();
+                break;
+        }
+    }
+
+    @Override
+    public void showTabs(List<LiveCategory> list) {
+        int i=0;
+        for (LiveCategory e : list) {
+            if (e.isDefault()) {
+                TabLayout.Tab tab = tlIndicator.getTabAt(i++);
+                if (tab==null) continue;
+                tab.setText(e.getName());
+            }
+        }
+    }
+
+    @Override
+    public void initLiveListFragment(List<LiveCategory> list) {
+        for (LiveCategory e : list) {
+            if (e.isDefault()) {
+                LiveListFragment liveListFragment = new LiveListFragment();
+                liveListFragment.setSlug(e.getSlug());
+                mFragmentList.add(liveListFragment);
+            }
+        }
+        mPagerAdapter.notifyDataSetChanged();
     }
 }
 

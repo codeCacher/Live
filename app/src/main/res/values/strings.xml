@@ -26,6 +26,14 @@
     <string name="me_game">游戏中心</string>
     <string name="me_setting">设置</string>
 
+    <!-- 登录 -->
+    <string name="login">登录</string>
+    <string name="register">注册</string>
+    <string name="tip_username_number">用户名/手机号</string>
+    <string name="tip_password">密码</string>
+    <string name="forget_password">忘记密码</string>
+    <string name="third_login">第三方登录</string>
+
     <string name="quit_tip">再按一次退出直播</string>
 
     <string name="live_title">直播</string>

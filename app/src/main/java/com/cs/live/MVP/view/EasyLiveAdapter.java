@@ -8,10 +8,10 @@ import android.widget.TextView;
 
 import com.cs.live.R;
 import com.cs.live.bean.LiveInfo;
+import com.facebook.drawee.view.SimpleDraweeView;
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -32,17 +32,15 @@ public class EasyLiveAdapter extends RecyclerArrayAdapter<LiveInfo> {
 
     private static class LiveViewHolder extends BaseViewHolder<LiveInfo> {
 
-
-        ImageView iv;
+        SimpleDraweeView ivThumb;
         TextView tvTitle;
         TextView tvName;
         TextView tvViewer;
 
-
         LiveViewHolder(ViewGroup parent) {
             super(parent, R.layout.live_list_item);
 
-            iv = $(R.id.iv);
+            ivThumb = $(R.id.iv_thumb);
             tvTitle = $(R.id.tvTitle);
             tvName = $(R.id.tvName);
             tvViewer = $(R.id.tvViewer);
@@ -52,12 +50,10 @@ public class EasyLiveAdapter extends RecyclerArrayAdapter<LiveInfo> {
         public void setData(LiveInfo data) {
             super.setData(data);
 
-//            Glide.with(getContext()).load(data.getThumb()).placeholder(R.mipmap.live_default).error(R.mipmap.live_default).crossFade().centerCrop().diskCacheStrategy(DiskCacheStrategy.SOURCE).into(iv);
-//
-//            tvTitle.setText(data.getTitle());
-//            tvName.setText(data.getNick());
-//            tvViewer.setText(data.getViews());
-
+            ivThumb.setImageURI(data.getThumb());
+            tvTitle.setText(data.getTitle());
+            tvName.setText(data.getNick());
+            tvViewer.setText(data.getView());
         }
     }
 }

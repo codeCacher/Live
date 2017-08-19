@@ -35,7 +35,7 @@
                     app:tabTextColor="@android:color/black"
                     app:tabSelectedTextColor="@color/colorAccent"
                     app:tabIndicatorHeight="3dp"
-                    app:tabIndicatorColor="@color/colorPrimary"
+                    app:tabIndicatorColor="@color/colorAccent"
                     app:tabMode="scrollable"
                     app:tabMinWidth="60dp" />
                 <ImageView

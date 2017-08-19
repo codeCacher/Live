@@ -19,7 +19,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/tips_current_not_login"
-            android:textColor="@color/text_error_color"
+            android:textColor="@color/text_gray_color"
             android:layout_margin="10dp"/>
         <TextView
             android:id="@+id/tvLogin"

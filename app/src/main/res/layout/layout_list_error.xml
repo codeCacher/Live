@@ -14,6 +14,6 @@
         android:layout_height="wrap_content"
         android:paddingTop="6dp"
         android:text="@string/network_unavailable"
-        android:textColor="@color/text_error_color"
+        android:textColor="@color/text_gray_color"
         android:layout_marginBottom="0dp"/>
 </LinearLayout>

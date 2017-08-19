@@ -8,6 +8,9 @@ public class LiveCategory {
 
     private long id;
     private String name;
+    /**
+     * 1-default 0-not
+     */
     private int is_default;
     private int sort;
     private String icon_gray;
@@ -16,6 +19,11 @@ public class LiveCategory {
     private String slug;
     private int type;
     private int screen;
+
+    public boolean isDefault(){
+        int DEFAULT = 1;
+        return (is_default== DEFAULT);
+    }
 
     public long getId() {
         return id;

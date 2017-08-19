@@ -8,15 +8,18 @@ import com.cs.live.http.APIService;
 
 import java.util.List;
 
-import rx.Observable;
-import rx.functions.Func1;
-import rx.schedulers.Schedulers;
+import io.reactivex.Observable;
+import io.reactivex.annotations.NonNull;
+import io.reactivex.functions.Function;
+import io.reactivex.schedulers.Schedulers;
 
 /**
  * Created by Administrator on 2017/8/17.
  */
 
 public class LiveInfoDateSource implements LiveInfoModel {
+
+    public static String SLUG_ALL_LIVE = "slug_all_live";
 
     private APIService getAPIService() {
         return APIRetrofit.getAPIService();
@@ -27,9 +30,9 @@ public class LiveInfoDateSource implements LiveInfoModel {
 
         return getAPIService()
                 .getLiveList()
-                .map(new Func1<LiveListResult, List<LiveInfo>>() {
+                .map(new Function<LiveListResult, List<LiveInfo>>() {
                     @Override
-                    public List<LiveInfo> call(LiveListResult liveListResult) {
+                    public List<LiveInfo> apply(@NonNull LiveListResult liveListResult) throws Exception {
                         return liveListResult.getData();
                     }
                 })
@@ -38,14 +41,19 @@ public class LiveInfoDateSource implements LiveInfoModel {
 
     @Override
     public Observable<List<LiveInfo>> getLiveListByCategory(String slug) {
-        return getAPIService()
-                .getLiveListByCategories(slug)
-                .map(new Func1<LiveListResult, List<LiveInfo>>() {
-                    @Override
-                    public List<LiveInfo> call(LiveListResult liveListResult) {
-                        return liveListResult.getData();
-                    }
-                }).subscribeOn(Schedulers.newThread());
+        if(slug.equals(SLUG_ALL_LIVE)){
+            return getAllLiveList();
+        }else {
+            return getAPIService()
+                    .getLiveListByCategories(slug)
+                    .map(new Function<LiveListResult, List<LiveInfo>>() {
+                        @Override
+                        public List<LiveInfo> apply(@NonNull LiveListResult liveListResult) throws Exception {
+                            return liveListResult.getData();
+                        }
+                    })
+                    .subscribeOn(Schedulers.newThread());
+        }
     }
 
     @Override

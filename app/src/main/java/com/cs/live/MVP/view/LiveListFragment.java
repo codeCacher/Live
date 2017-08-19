@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.cs.live.MVP.model.LiveInfoDateSource;
 import com.cs.live.MVP.presenter.LiveListImpPresenter;
 import com.cs.live.R;
 import com.cs.live.bean.LiveInfo;
@@ -32,8 +33,9 @@ public class LiveListFragment extends Fragment implements LiveListView {
     EasyRecyclerView ervLiveList;
     Unbinder unbinder;
 
-    private final int COLUMN_SIZE = 2;
     private LiveListImpPresenter mPresenter;
+    private EasyLiveAdapter mAdapter;
+    private String mSlug = LiveInfoDateSource.SLUG_ALL_LIVE;
 
     @Nullable
     @Override
@@ -43,23 +45,10 @@ public class LiveListFragment extends Fragment implements LiveListView {
 
         initEasyRecyclerView();
 
-        return view;
-    }
-
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+        mPresenter = new LiveListImpPresenter(getContext(),this,new LiveInfoDateSource(),mSlug);
         mPresenter.start();
-    }
 
-    private void initEasyRecyclerView() {
-        EasyLiveAdapter easyLiveAdapter = new EasyLiveAdapter(getContext(),new ArrayList<LiveInfo>());
-        ervLiveList.setAdapter(easyLiveAdapter);
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(),COLUMN_SIZE);
-        gridLayoutManager.setSpanSizeLookup(easyLiveAdapter.obtainGridSpanSizeLookUp(COLUMN_SIZE));
-        ervLiveList.setLayoutManager(gridLayoutManager);
-        SpaceDecoration spaceDecoration = new SpaceDecoration(DensityUtil.dp2px(getContext(),getResources().getDimension(R.dimen.live_list_padding_size)));
-        ervLiveList.addItemDecoration(spaceDecoration);
+        return view;
     }
 
     @Override
@@ -76,7 +65,8 @@ public class LiveListFragment extends Fragment implements LiveListView {
 
     @Override
     public void showList(List<LiveInfo> list) {
-
+        mAdapter.clear();
+        mAdapter.addAll(list);
     }
 
     @Override
@@ -92,5 +82,35 @@ public class LiveListFragment extends Fragment implements LiveListView {
     @Override
     public void showNoneContent() {
         ervLiveList.showEmpty();
+    }
+
+
+    private void initEasyRecyclerView() {
+        int COLUMN_SIZE = 2;
+
+        mAdapter = new EasyLiveAdapter(getContext(),new ArrayList<LiveInfo>());
+        ervLiveList.setAdapter(mAdapter);
+
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), COLUMN_SIZE);
+        gridLayoutManager.setSpanSizeLookup(mAdapter.obtainGridSpanSizeLookUp(COLUMN_SIZE));
+        ervLiveList.setLayoutManager(gridLayoutManager);
+
+        SpaceDecoration spaceDecoration = new SpaceDecoration(DensityUtil.dp2px(getContext(),getResources().getDimension(R.dimen.live_list_padding_size)));
+        ervLiveList.addItemDecoration(spaceDecoration);
+    }
+
+    /**
+     * 设置该Fragment的分类slug,默认为显示全部
+     * @param slug 分类标识
+     */
+    public void setSlug(String slug){
+        this.mSlug = slug;
+        if(mPresenter!=null){
+            mPresenter.mSlug = slug;
+        }
+    }
+
+    public String getSlug(){
+        return mSlug;
     }
 }

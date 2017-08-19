@@ -28,8 +28,8 @@
     <!--房间标签颜色-->
     <color name="room_lable_color">#999999</color>
 
-    <!--无效灰色字体-->
-    <color name="text_error_color">#7f000000</color>
+    <!--灰色字体-->
+    <color name="text_gray_color">#7f000000</color>
 
     <color name="me_mid_title_bg">#1f000000</color>
     <color name="me_mid_title_mid_line_bg">#7f000000</color>

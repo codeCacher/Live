@@ -6,7 +6,7 @@ import com.cs.live.bean.LiveInfo;
 
 import java.util.List;
 
-import rx.Observable;
+import io.reactivex.Observable;
 
 /**
  * Created by Administrator on 2017/8/15.
